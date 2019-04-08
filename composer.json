@@ -1,0 +1,36 @@
+{
+    "name": "lexik/cron-file-generator-bundle",
+    "description": "This bundle provides service for generate cron file",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gilles Gauthier",
+            "email": "g.gauthier@lexik.fr",
+            "homepage": "https://github.com/spike31"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "symfony/console": "^3.4|^4.0",
+        "symfony/framework-bundle":  "^3.4|^4.0",
+        "symfony/templating": "^4.2",
+        "symfony/twig-bundle": "^4.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.1|^2.8",
+        "symfony/phpunit-bridge": "^3.4|^4.0",
+        "symfony/yaml": "^3.4|^4.0",
+        "symfony/console": "^3.4|^4.0",
+        "symfony/var-dumper": "^4.2"
+    },
+    "autoload": {
+        "psr-4": { "Lexik\\Bundle\\CronFileGeneratorBundle\\": "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/simple-phpunit"
+        ]
+    }
+}

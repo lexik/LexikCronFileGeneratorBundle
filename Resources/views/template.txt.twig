@@ -1,0 +1,6 @@
+{% for cron in crons %}
+# {{  cron.name }}
+
+{{ cron.expression }} {{ user }} {{ php_version }} {{ absolute_path }} {{ cron.command }} --env={{ env }}
+
+{% endfor %}

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service class="Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFileFactory" id="lexik_bundle_cron_file_generator.cron.dump_file_factory" public="true">
+            <argument id="lexik_cron_file_generator.cron.dump_file" type="service"/>
+        </service>
+
+        <service class="Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFile" id="lexik_cron_file_generator.cron.dump_file" public="true">
+            <argument id="templating" type="service"/>
+            <argument id="lexik_cron_file_generator.cron.configuration" type="service"/>
+        </service>
+
+        <service class="Lexik\Bundle\CronFileGeneratorBundle\Cron\Configuration" id="lexik_cron_file_generator.cron.configuration" public="false">
+            <argument>%lexik_cron_file_generator.cron.configuration_arguments%</argument>
+        </service>
+
+    </services>
+
+</container>
