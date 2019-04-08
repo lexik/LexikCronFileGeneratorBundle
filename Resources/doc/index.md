@@ -15,6 +15,7 @@ Configuration
 -------------
 
 Example with the following context:
+
 * You have two environments : prod and staging
 * One user project_staging on your staging server and project_prod on your prod server
 * The php version is the same for each server.
