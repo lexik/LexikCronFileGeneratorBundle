@@ -1,3 +1,8 @@
+LexikCronFileGeneratorBundle
+============================
+
+[![Build Status](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle.svg?branch=master)](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle)
+
 Installation
 ============
 
