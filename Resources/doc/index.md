@@ -15,12 +15,12 @@ Configuration
 -------------
 
 Example with the following context:
-You have two environments : prod and staging
-One user project_staging on your staging server and project_prod on your prod server
-The php version is the same for each server.
-Absolute_path is the path for your project.
-Output_path will be the path where the file will be create.
-Crons is an array of cron per env.
+* You have two environments : prod and staging
+* One user project_staging on your staging server and project_prod on your prod server
+* The php version is the same for each server.
+* Absolute_path is the path for your project.
+* Output_path will be the path where the file will be create.
+* Crons is an array of cron per env.
 
 **Note** Have different php version is not possible and not recommended.
 
