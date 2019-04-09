@@ -20,7 +20,7 @@ class GenerateCronCommand extends Command
      */
     private $dumpFileFactory;
 
-    public function __construct(DumpFileFactory $dumpFileFactory, ?string $name = null)
+    public function __construct(DumpFileFactory $dumpFileFactory, $name = null)
     {
         parent::__construct($name);
 

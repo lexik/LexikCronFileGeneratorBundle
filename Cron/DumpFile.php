@@ -4,12 +4,12 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Cron;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 
 class DumpFile
 {
     /**
-     * @var EngineInterface
+     * @var Environment
      */
     private $twigEngine;
 
@@ -24,7 +24,7 @@ class DumpFile
     private $env;
 
     public function __construct(
-        EngineInterface $twigEngine,
+        Environment $twigEngine,
         Configuration $configuration
     ) {
         $this->twigEngine = $twigEngine;
