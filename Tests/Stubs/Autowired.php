@@ -15,4 +15,12 @@ class Autowired
     {
         $this->dumpFile = $dumpFile;
     }
+
+    /**
+     * @return DumpFile
+     */
+    public function getDumpFile(): DumpFile
+    {
+        return $this->dumpFile;
+    }
 }

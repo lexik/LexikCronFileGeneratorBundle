@@ -2,18 +2,19 @@
 
 namespace Lexik\Bundle\CronFileGeneratorBundle\Tests\DependencyInjection;
 
+use Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFile;
 use Lexik\Bundle\CronFileGeneratorBundle\DependencyInjection\LexikCronFileGeneratorExtension;
 use Lexik\Bundle\CronFileGeneratorBundle\LexikCronFileGeneratorBundle;
 use Lexik\Bundle\CronFileGeneratorBundle\Tests\Stubs\Autowired;
 use Lexik\Bundle\CronFileGeneratorBundle\Tests\TestCase;
-use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TemplatingPass;
 use Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\HttpKernel\Kernel;
 
 class LexikCronFileGeneratorExtensionTest extends TestCase
 {
@@ -22,7 +23,6 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $container = $this->createContainer([
             'framework' => [
                 'secret' => 'testing',
-                'templating' => ['engines' => ['twig']],
                 ],
             'twig' => [
                 'strict_variables' => true,
@@ -61,7 +61,8 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
 
         $this->compileContainer($container);
 
-        $autowired = $container->get('autowired');
+        $this->assertInstanceOf(Autowired::class, $container->get('autowired'));
+        $this->assertInstanceOf(DumpFile::class, $container->get('autowired')->getDumpFile());
     }
 
     private function createContainer(array $configs = [])
@@ -77,10 +78,23 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'kernel.container_class'  => 'AutowiringTestContainer',
             'kernel.bundles' => [
                 'FrameworkBundle' => FrameworkBundle::class,
-                'TwigBundle' => TwigBundle::class,
                 'LexikCronFileGeneratorBundle' => LexikCronFileGeneratorBundle::class,
             ],
         ]));
+
+        $container->set(
+            'kernel',
+            new class ('test', false) extends Kernel
+            {
+                public function registerBundles()
+                {
+                }
+
+                public function registerContainerConfiguration(LoaderInterface $loader)
+                {
+                }
+            }
+        );
 
         $container->registerExtension(new FrameworkExtension());
         $container->registerExtension(new TwigExtension());
@@ -95,9 +109,8 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
 
     private function compileContainer(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new TemplatingPass(), PassConfig::TYPE_BEFORE_REMOVING);
-        $container->getCompilerPassConfig()->setOptimizationPasses([]);
-        $container->getCompilerPassConfig()->setRemovingPasses([]);
+        (new TwigBundle())->build($container);
+
         $container->compile();
     }
 }
