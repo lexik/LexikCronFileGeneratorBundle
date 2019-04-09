@@ -60,7 +60,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             ->setAutowired(true);
 
         $this->compileContainer($container);
-dd($container->get('templating'));
+
         $autowired = $container->get('autowired');
     }
 
