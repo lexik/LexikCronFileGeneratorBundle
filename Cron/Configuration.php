@@ -129,7 +129,7 @@ class Configuration
         return $this;
     }
 
-    private function checkConfiguration(): void
+    private function checkConfiguration()
     {
         $valuesToCheck = ['user', 'absolute_path'];
 
