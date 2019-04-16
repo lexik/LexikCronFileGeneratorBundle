@@ -2,6 +2,7 @@ LexikCronFileGeneratorBundle
 ============================
 
 [![Build Status](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle.svg?branch=master)](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle)
+[![Coverage Status](https://coveralls.io/repos/github/lexik/LexikCronFileGeneratorBundle/badge.svg?branch=master)](https://coveralls.io/github/lexik/LexikCronFileGeneratorBundle?branch=master)
 
 Installation
 ============
