@@ -16,21 +16,21 @@ Configuration
 
 Example with the following context:
 
-* You have two environments : prod and staging
+* You have two environments: prod and staging
 * One user project_staging on your staging server and project_prod on your prod server
 * The php version is the same for each server.
 * Absolute_path is the path for your project.
 * Output_path will be the path where the file will be create.
 * Crons is an array of cron per env.
 
-**Note** Have different php version is not possible and not recommended.
+**Note** Having different PHP versions is not possible and not recommended.
 
 Configure your crons per env in your `config/packages/lexik_cron_file_generator.yaml`:
 
 ``` yaml
 lexik_cron_file_generator:
   env_available:                 # declare your env availables
-    - staging                    # exemple: staging and prod
+    - staging                    # example: staging and prod
     - prod
   user:
     staging: project_staging
