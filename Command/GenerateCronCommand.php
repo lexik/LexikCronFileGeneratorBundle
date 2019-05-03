@@ -29,15 +29,15 @@ class GenerateCronCommand extends Command
 
     protected function configure()
     {
-        $description = <<<EOPHP
-Generate cron file
-
-> Crons are required for execute the command.
-EOPHP;
-
         $this
             ->setName(static::$defaultName)
-            ->setDescription($description)
+            ->setDescription('Generate a cron file')
+            ->setHelp(<<<'EOPHP'
+The <info>%command.name%</info> generate cron file
+
+Crons are required for execute the command.
+EOPHP
+            )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the dump file as a dry run.')
             ->addArgument('env-mode', InputArgument::REQUIRED, 'Env config')
         ;

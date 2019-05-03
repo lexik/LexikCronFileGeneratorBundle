@@ -58,7 +58,7 @@ class DumpFile
 
     private function render()
     {
-        return $this->twigEngine->render('template.txt.twig', [
+        return $this->twigEngine->render('@LexikCronFileGenerator/template.txt.twig', [
             'crons' => $this->configuration->getCrons(),
             'user' => $this->configuration->getUser(),
             'absolute_path' => $this->configuration->getAbsolutePath(),
