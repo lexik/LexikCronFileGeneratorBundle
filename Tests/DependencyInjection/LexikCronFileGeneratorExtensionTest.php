@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class LexikCronFileGeneratorExtensionTest extends TestCase
 {
-    public function testLoadEmptyConfiguration()
+    public function testLoadConfiguration()
     {
         $container = $this->createContainer([
             'framework' => [

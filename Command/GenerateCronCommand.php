@@ -30,9 +30,9 @@ class GenerateCronCommand extends Command
     protected function configure()
     {
         $description = <<<EOPHP
-Generate cron file
+The <info>%command.name%</info> generate cron file
 
-> Crons are required for execute the command.
+Crons are required for execute the command.
 EOPHP;
 
         $this

@@ -1,0 +1,10 @@
+framework:
+  secret: test
+  test: ~
+  session:
+    storage_id: session.storage.mock_file
+
+twig:
+  strict_variables: false
+  default_path: './Resources/views'
+

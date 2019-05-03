@@ -131,9 +131,7 @@ class Configuration
 
     private function checkConfiguration()
     {
-        $valuesToCheck = ['user', 'absolute_path'];
-
-        foreach ($valuesToCheck as $value) {
+        foreach (['user', 'absolute_path'] as $value) {
             $this->checkEnvConfiguration($this->cronConfig, $value);
         }
 
