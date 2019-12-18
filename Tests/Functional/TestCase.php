@@ -7,6 +7,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 abstract class TestCase extends WebTestCase
 {
+    use ForwardCompatTestCaseTrait;
+
     protected static $client;
 
     /**
@@ -26,13 +28,5 @@ abstract class TestCase extends WebTestCase
     {
         $fs = new Filesystem();
         $fs->remove(\sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown()
-    {
-        static::$kernel = null;
     }
 }

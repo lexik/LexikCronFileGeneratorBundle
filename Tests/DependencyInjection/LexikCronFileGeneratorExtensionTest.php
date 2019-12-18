@@ -12,8 +12,10 @@ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\HttpKernel\Kernel;
 
 class LexikCronFileGeneratorExtensionTest extends TestCase
@@ -80,6 +82,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
                 'FrameworkBundle' => FrameworkBundle::class,
                 'LexikCronFileGeneratorBundle' => LexikCronFileGeneratorBundle::class,
             ],
+            'env(base64:default::SYMFONY_DECRYPTION_SECRET)' => 'dummy',
         ]));
 
         $container->set(
@@ -103,6 +106,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         foreach ($configs as $extension => $config) {
             $container->loadFromExtension($extension, $config);
         }
+
 
         return $container;
     }
