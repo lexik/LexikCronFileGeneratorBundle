@@ -26,6 +26,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
                 ],
             'twig' => [
                 'strict_variables' => true,
+                'exception_controller' => null, // to be removed in 5.0
             ],
             'lexik_cron_file_generator' => [
                 'env_available' => [
@@ -80,6 +81,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
                 'FrameworkBundle' => FrameworkBundle::class,
                 'LexikCronFileGeneratorBundle' => LexikCronFileGeneratorBundle::class,
             ],
+            'env(base64:default::SYMFONY_DECRYPTION_SECRET)' => 'dummy',
         ]));
 
         $container->set(
@@ -103,6 +105,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         foreach ($configs as $extension => $config) {
             $container->loadFromExtension($extension, $config);
         }
+
 
         return $container;
     }
