@@ -7,6 +7,7 @@ framework:
 twig:
   strict_variables: false
   default_path: './Resources/views'
+  exception_controller: null
 
 lexik_cron_file_generator:
   env_available:

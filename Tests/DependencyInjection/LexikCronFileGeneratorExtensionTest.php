@@ -12,10 +12,8 @@ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\HttpKernel\Kernel;
 
 class LexikCronFileGeneratorExtensionTest extends TestCase
@@ -28,6 +26,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
                 ],
             'twig' => [
                 'strict_variables' => true,
+                'exception_controller' => null, // to be removed in 5.0
             ],
             'lexik_cron_file_generator' => [
                 'env_available' => [
