@@ -24,7 +24,7 @@ abstract class TestCase extends WebTestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $fs = new Filesystem();
         $fs->remove(\sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
