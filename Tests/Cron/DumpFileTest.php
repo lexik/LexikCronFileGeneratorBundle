@@ -4,6 +4,7 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Tests\Cron;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Cron\Configuration;
 use Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFile;
+use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 
@@ -62,11 +63,10 @@ class DumpFileTest extends TestCase
         $this->assertEquals($this->outputDir.'/cron_file', $dumpFile->dumpFile());
     }
 
-    /**
-     * @expectedException \Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException
-     */
     public function testEmptyCron()
     {
+        self::expectException(CronEmptyException::class);
+
         $templating = $this->createMock(Environment::class);
         $templating->expects($this->never())->method('render');
 

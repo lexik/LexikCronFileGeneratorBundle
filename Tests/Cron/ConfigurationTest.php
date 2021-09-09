@@ -15,12 +15,11 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('project_staging', $configuration->initWithEnv('staging')->getUser());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Env not availables. Use this: staging
-     */
     public function testInitEnvIsAvailable()
     {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('Env not availables. Use this: staging');
+
         $configuration = new Configuration($this->getFullConfig());
         $configuration->initWithEnv('test');
     }
@@ -61,12 +60,11 @@ class ConfigurationTest extends TestCase
         $this->assertEmpty($configuration->getCrons());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Env not availables. Use this: staging
-     */
     public function testWithBadEnv()
     {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('Env not availables. Use this: staging');
+
         new Configuration([
             'env_available' => [
                 'staging',
@@ -77,12 +75,11 @@ class ConfigurationTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage You have missing env. Use this: staging, prod
-     */
     public function testWithMissingEnv()
     {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('You have missing env. Use this: staging, prod');
+
         new Configuration([
             'env_available' => [
                 'staging', 'prod',
@@ -93,12 +90,11 @@ class ConfigurationTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Env not availables. Use this: staging
-     */
     public function testWithBadCronEnv()
     {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('Env not availables. Use this: staging');
+
         new Configuration([
             'env_available' => [
                 'staging',
