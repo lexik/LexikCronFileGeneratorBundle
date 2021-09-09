@@ -73,6 +73,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'kernel.root_dir' => __DIR__,
             'kernel.project_dir' => __DIR__,
             'kernel.build_dir' => __DIR__,
+            'kernel.runtime_environment' => 'test',
             'kernel.charset' => 'UTF-8',
             'kernel.environment'      => 'test',
             'kernel.debug' => false,
