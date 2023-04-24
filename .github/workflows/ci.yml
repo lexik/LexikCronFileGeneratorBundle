@@ -42,7 +42,6 @@ jobs:
       - name: Download Composer cache dependencies from cache
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - name: Install Symfony ${{ matrix.symfony }}
 
       - name: Cache Composer dependencies
         uses: actions/cache@v2
@@ -53,7 +52,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer update --no-interaction --prefer-{{ matrix.dependencies }} --prefer-dist --no-progress
+          composer update --no-interaction --prefer-${{ matrix.dependencies }} --prefer-dist --no-progress
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
