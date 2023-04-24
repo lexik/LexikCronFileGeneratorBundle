@@ -13,11 +13,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateCronCommand extends Command
 {
-    protected static $defaultName = 'lexik:cron:generate-file';
-
     private DumpFileFactory $dumpFileFactory;
 
-    public function __construct(DumpFileFactory $dumpFileFactory, $name = null)
+    public function __construct(DumpFileFactory $dumpFileFactory, string $name = 'lexik:cron:generate-file')
     {
         parent::__construct($name);
 
@@ -27,7 +25,6 @@ class GenerateCronCommand extends Command
     protected function configure()
     {
         $this
-            ->setName(static::$defaultName)
             ->setDescription('Generate a cron file')
             ->setHelp(<<<'EOPHP'
 The <info>%command.name%</info> generates cron file

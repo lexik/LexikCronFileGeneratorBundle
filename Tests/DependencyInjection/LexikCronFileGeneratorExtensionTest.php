@@ -24,6 +24,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'framework' => [
                 'secret' => 'testing',
                 'ide' => null,
+                'http_method_override' => false,
             ],
             'twig' => [
                 'strict_variables' => true,
@@ -67,7 +68,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $this->assertInstanceOf(DumpFile::class, $container->get('autowired')->getDumpFile());
     }
 
-    private function createContainer(array $configs = [])
+    private function createContainer(array $configs = []): ContainerBuilder
     {
         $container = new ContainerBuilder(new ParameterBag([
             'kernel.cache_dir' => __DIR__,

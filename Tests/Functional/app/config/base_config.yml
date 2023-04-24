@@ -1,6 +1,7 @@
 framework:
   secret: test
   test: ~
+  http_method_override: false
 
 twig:
   strict_variables: false

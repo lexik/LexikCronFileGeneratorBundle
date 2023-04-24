@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    private $config;
+    private string $config;
 
     public function __construct(string $environment, bool $debug, string $config = 'base')
     {
@@ -35,11 +35,6 @@ class AppKernel extends Kernel
         ];
     }
 
-    public function getRootDir()
-    {
-        return __DIR__;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -56,7 +51,7 @@ class AppKernel extends Kernel
         return \sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';
     }
 
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $container->register('logger', NullLogger::class);
     }
@@ -64,7 +59,7 @@ class AppKernel extends Kernel
     /**
      * Loads the container configuration.
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(\sprintf(__DIR__.'/config/%s_config.yml', $this->config));
     }
