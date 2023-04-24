@@ -6,10 +6,7 @@ use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
 
 class DumpFileFactory
 {
-    /**
-     * @var DumpFile
-     */
-    private $dumpFile;
+    private DumpFile $dumpFile;
 
     public function __construct(DumpFile $dumpFile)
     {
@@ -17,13 +14,9 @@ class DumpFileFactory
     }
 
     /**
-     * @param string $env
-     *
-     * @return DumpFile
-     *
      * @throws CronEmptyException
      */
-    public function createWithEnv(string $env)
+    public function createWithEnv(string $env): DumpFile
     {
         $this->dumpFile->init($env);
 

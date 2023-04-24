@@ -15,10 +15,7 @@ class GenerateCronCommand extends Command
 {
     protected static $defaultName = 'lexik:cron:generate-file';
 
-    /**
-     * @var DumpFileFactory
-     */
-    private $dumpFileFactory;
+    private DumpFileFactory $dumpFileFactory;
 
     public function __construct(DumpFileFactory $dumpFileFactory, $name = null)
     {

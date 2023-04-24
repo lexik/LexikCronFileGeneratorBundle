@@ -4,20 +4,11 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Cron;
 
 class Cron
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var string
-     */
-    private $expression;
+    private string $expression;
 
-    /**
-     * @var string
-     */
-    private $command;
+    private string $command;
 
     public function __construct(string $name, string $expression, string $command)
     {
@@ -26,26 +17,17 @@ class Cron
         $this->command = $command;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getExpression()
+    public function getExpression(): string
     {
         return $this->expression;
     }
 
-    /**
-     * @return string
-     */
-    public function getCommand()
+    public function getCommand(): string
     {
         return $this->command;
     }
