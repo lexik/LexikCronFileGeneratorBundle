@@ -32,5 +32,6 @@
         "test": [
             "vendor/bin/simple-phpunit"
         ]
-    }
+    },
+    "minimum-stability": "dev"
 }
