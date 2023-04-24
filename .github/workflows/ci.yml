@@ -53,11 +53,12 @@ jobs:
         if: matrix.symfony == '6.3.*@dev'
         run: composer config minimum-stability dev
 
+      - name: Install Symfony ${{ matrix.symfony }}
+        run: composer require symfony/symfony:${{ matrix.symfony }} --no-update
+
       - name: Install dependencies
         run: |
           composer update --no-interaction ${{ matrix.dependencies }} --prefer-dist --no-progress
-        env:
-          SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
       - name: Run PHPUnit Tests
         run: composer test
