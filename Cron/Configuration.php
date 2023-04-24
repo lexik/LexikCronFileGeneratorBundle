@@ -32,13 +32,13 @@ class Configuration
     /**
      * @var string
      */
-    private $readableEnvAvailables;
+    private $readableAvailableEnvs;
 
     public function __construct(array $cronConfig)
     {
         $this->cronConfig = $cronConfig;
         $this->availablesEnvs = $this->cronConfig['env_available'];
-        $this->readableEnvAvailables = \implode(', ', $this->availablesEnvs);
+        $this->readableAvailableEnvs = \implode(', ', $this->availablesEnvs);
 
         $this->checkConfiguration();
     }
@@ -46,7 +46,7 @@ class Configuration
     public function initWithEnv($env)
     {
         if (!\in_array($env, $this->availablesEnvs)) {
-            throw new \InvalidArgumentException('Env not availables. Use this: '.$this->readableEnvAvailables);
+            throw new \InvalidArgumentException('Env not available. Use this: '.$this->readableAvailableEnvs);
         }
 
         $this->env = $env;
@@ -58,19 +58,19 @@ class Configuration
 
     private function checkEnvConfiguration(array $searchIn, string $key)
     {
-        $countEnvAvailables = \count($this->availablesEnvs);
+        $availableEnvsCount = \count($this->availablesEnvs);
 
         $countEnv = 0;
         foreach ($searchIn[$key] as $key => $env) {
             if (!\in_array($key, $this->availablesEnvs)) {
-                throw new \InvalidArgumentException('Env not availables. Use this: '.$this->readableEnvAvailables);
+                throw new \InvalidArgumentException('Env not available. Use this: '.$this->readableAvailableEnvs);
             }
 
             ++$countEnv;
         }
 
-        if ($countEnv !== $countEnvAvailables) {
-            throw new \InvalidArgumentException('You have missing env. Use this: '.$this->readableEnvAvailables);
+        if ($countEnv !== $availableEnvsCount) {
+            throw new \InvalidArgumentException('You have missing env. Use this: '.$this->readableAvailableEnvs);
         }
     }
 

@@ -34,7 +34,7 @@ class GenerateCronFileCommandTest extends TestCase
 
         $this->assertSame(1, $tester->execute(['env-mode' => 'staging']));
 
-        $expected = 'There is no crons in your configuration. Crons are required for execute the command';
+        $expected = 'There is no cron in your configuration. Crons are required to execute this command';
 
         $this->assertStringContainsString($expected, $tester->getDisplay());
     }

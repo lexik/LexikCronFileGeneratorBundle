@@ -1,8 +1,6 @@
 framework:
   secret: test
   test: ~
-  session:
-    storage_id: session.storage.mock_file
 
 twig:
   strict_variables: false
@@ -18,4 +16,3 @@ lexik_cron_file_generator:
   absolute_path:
     staging: path/to/staging
   output_path: '%kernel.cache_dir%/cron_test'
-

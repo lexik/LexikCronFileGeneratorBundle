@@ -18,7 +18,7 @@ class ConfigurationTest extends TestCase
     public function testInitEnvIsAvailable()
     {
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Env not availables. Use this: staging');
+        self::expectExceptionMessage('Env not available. Use this: staging');
 
         $configuration = new Configuration($this->getFullConfig());
         $configuration->initWithEnv('test');
@@ -63,7 +63,7 @@ class ConfigurationTest extends TestCase
     public function testWithBadEnv()
     {
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Env not availables. Use this: staging');
+        self::expectExceptionMessage('Env not available. Use this: staging');
 
         new Configuration([
             'env_available' => [
@@ -93,7 +93,7 @@ class ConfigurationTest extends TestCase
     public function testWithBadCronEnv()
     {
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Env not availables. Use this: staging');
+        self::expectExceptionMessage('Env not available. Use this: staging');
 
         new Configuration([
             'env_available' => [

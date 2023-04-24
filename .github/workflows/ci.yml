@@ -16,11 +16,15 @@ jobs:
     strategy:
       matrix:
         include:
-          - { os: ubuntu-latest, php: 7.3, symfony: "4.4.*"}
-          - { os: ubuntu-latest, php: 7.3, symfony: "5.1.*"}
-          - { os: ubuntu-latest, php: 7.4, symfony: "5.2.*"}
-          - { os: ubuntu-latest, php: 7.4, symfony: "5.3.*"}
-          - { os: ubuntu-latest, php: 8.0, symfony: "5.4.*@dev"}
+          - { os: ubuntu-latest, php: 7.4, symfony: "5.4.*", dependencies: "lowest"}
+          - { os: ubuntu-latest, php: 7.4, symfony: "5.4.*", dependencies: "stable"}
+          - { os: ubuntu-latest, php: 8.1, symfony: "5.4.*", dependencies: "lowest"}
+          - { os: ubuntu-latest, php: 8.1, symfony: "5.4.*", dependencies: "stable"}
+          - { os: ubuntu-latest, php: 8.2, symfony: "5.4.*", dependencies: "stable"}
+          - { os: ubuntu-latest, php: 8.0, symfony: "6.3.*@dev", dependencies: "lowest"}
+          - { os: ubuntu-latest, php: 8.0, symfony: "6.3.*@dev", dependencies: "stable"}
+          - { os: ubuntu-latest, php: 8.1, symfony: "6.3.*@dev", dependencies: "stable"}
+          - { os: ubuntu-latest, php: 8.2, symfony: "6.3.*@dev", dependencies: "stable"}
 
     steps:
       - uses: actions/checkout@v2
@@ -34,19 +38,24 @@ jobs:
           tools: composer
       - name: Show PHP version
         run: php -v && composer -V
+
       - name: Download Composer cache dependencies from cache
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Install Symfony ${{ matrix.symfony }}
-        run: composer require symfony/symfony:${{ matrix.symfony }} --no-update
+
       - name: Cache Composer dependencies
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ matrix.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ matrix.os }}-composer-
+
       - name: Install dependencies
         run: |
-          composer install --no-interaction
-      - name: "Run PHPUnit Tests"
-        run: "composer test"
+          composer update --no-interaction --prefer-{{ matrix.dependencies }} --prefer-dist --no-progress
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+      - name: Run PHPUnit Tests
+        run: composer test

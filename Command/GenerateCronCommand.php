@@ -33,9 +33,9 @@ class GenerateCronCommand extends Command
             ->setName(static::$defaultName)
             ->setDescription('Generate a cron file')
             ->setHelp(<<<'EOPHP'
-The <info>%command.name%</info> generate cron file
+The <info>%command.name%</info> generates cron file
 
-Crons are required for execute the command.
+Crons are required to execute the command.
 EOPHP
             )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the dump file as a dry run.')
@@ -43,18 +43,18 @@ EOPHP
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->title('Generate cron file');
+        $io->title('Generated cron file');
 
         $dryRun = (boolean) $input->getOption('dry-run');
 
         try {
             $dumpFile = $this->dumpFileFactory->createWithEnv($input->getArgument('env-mode'));
         } catch (CronEmptyException $e) {
-            $output->writeln('<error>There is no crons in your configuration. Crons are required for execute the command.</error>');
+            $output->writeln('<error>There is no cron in your configuration. Crons are required to execute this command.</error>');
 
             return 1;
         }

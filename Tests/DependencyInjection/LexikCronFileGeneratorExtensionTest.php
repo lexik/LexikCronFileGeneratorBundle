@@ -23,7 +23,8 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $container = $this->createContainer([
             'framework' => [
                 'secret' => 'testing',
-                ],
+                'ide' => null,
+            ],
             'twig' => [
                 'strict_variables' => true,
                 'exception_controller' => null, // to be removed in 5.0
@@ -90,8 +91,9 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'kernel',
             new class ('test', false) extends Kernel
             {
-                public function registerBundles()
+                public function registerBundles(): iterable
                 {
+                    return [];
                 }
 
                 public function registerContainerConfiguration(LoaderInterface $loader)
