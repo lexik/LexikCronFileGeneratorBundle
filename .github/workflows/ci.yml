@@ -49,6 +49,10 @@ jobs:
           key: ${{ matrix.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ matrix.os }}-composer-
 
+      - name: Set Composer stability
+        if: matrix.symfony == '6.3.*@dev'
+        run: composer config minimum-stability dev
+
       - name: Install dependencies
         run: |
           composer update --no-interaction --prefer-${{ matrix.dependencies }} --prefer-dist --no-progress
