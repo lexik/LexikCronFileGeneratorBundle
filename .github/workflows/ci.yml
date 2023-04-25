@@ -20,7 +20,6 @@ jobs:
           - { os: ubuntu-latest, php: 7.4, symfony: "5.4.*", composer_flag: ""}
           - { os: ubuntu-latest, php: 8.1, symfony: "5.4.*", composer_flag: "--prefer-lowest"}
           - { os: ubuntu-latest, php: 8.2, symfony: "5.4.*", composer_flag: ""}
-          - { os: ubuntu-latest, php: 8.1, symfony: "6.3.*@dev", composer_flag: "--prefer-lowest"}
           - { os: ubuntu-latest, php: 8.2, symfony: "6.3.*@dev", composer_flag: ""}
 
     steps:
@@ -38,7 +37,7 @@ jobs:
 
       - name: Download Composer cache dependencies from cache
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer dependencies
         uses: actions/cache@v2
@@ -58,11 +57,11 @@ jobs:
       - name: Fix PSR container compatibility
         if: |
           matrix.symfony == '5.4.*'
-          && endsWith(matrix.composer_flags, 'prefer-lowest')
+          && endsWith(matrix.composer_flag, 'prefer-lowest')
         run: composer require psr/container:^1.1
 
       - name: Silence Symfony deprecation helper for lower deps
-        if: endsWith(matrix.composer_flags, 'prefer-lowest')
+        if: endsWith(matrix.composer_flag, 'prefer-lowest')
         run: echo "SYMFONY_DEPRECATIONS_HELPER=weak" >> $GITHUB_ENV
 
       - name: Install dependencies
