@@ -19,9 +19,9 @@ class GenerateCronFileCommandTest extends TestCase
 
         $expected = '* * * * * project_staging php7.3 path/to/staging app:test --env=staging';
 
-        $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir') . '/cron_test';
+        $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir').'/cron_test';
 
-        $this->assertStringContainsString($expected, \file_get_contents($cacheDir));
+        $this->assertStringContainsString($expected, file_get_contents($cacheDir));
     }
 
     public function testGenerateEmptyCrons()

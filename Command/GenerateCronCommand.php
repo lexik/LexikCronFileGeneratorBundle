@@ -43,7 +43,7 @@ EOPHP
 
         $io->title('Generated cron file');
 
-        $dryRun = (boolean) $input->getOption('dry-run');
+        $dryRun = (bool) $input->getOption('dry-run');
 
         try {
             $dumpFile = $this->dumpFileFactory->createWithEnv($input->getArgument('env-mode'));

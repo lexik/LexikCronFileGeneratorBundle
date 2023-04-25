@@ -28,6 +28,6 @@ abstract class TestCase extends WebTestCase
     protected function setUp(): void
     {
         $fs = new Filesystem();
-        $fs->remove(\sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
+        $fs->remove(sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
     }
 }

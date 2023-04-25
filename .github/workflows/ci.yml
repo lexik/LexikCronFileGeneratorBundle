@@ -9,13 +9,29 @@ env:
   PHPUNIT_FLAGS: "-v"
 
 jobs:
-  build:
+  check-cs:
+    name: Check Coding Standards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Composer
+        uses: php-actions/composer@v6
+
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --diff --dry-run --allow-risky yes
+
+  test:
     runs-on: ${{ matrix.os }}
     name: PHP v${{ matrix.php }}, Symfony v${{ matrix.symfony }} ${{ matrix.composer_flag }}
     strategy:
       matrix:
         include:
           - { os: ubuntu-latest, php: 7.4, symfony: "4.4.*", composer_flag: "--prefer-lowest"}
+          - { os: ubuntu-latest, php: 8.2, symfony: "4.4.*", composer_flag: ""}
           - { os: ubuntu-latest, php: 7.4, symfony: "5.4.*", composer_flag: "--prefer-lowest"}
           - { os: ubuntu-latest, php: 7.4, symfony: "5.4.*", composer_flag: ""}
           - { os: ubuntu-latest, php: 8.1, symfony: "5.4.*", composer_flag: "--prefer-lowest"}
@@ -32,6 +48,7 @@ jobs:
           ini-values: date.timezone="Europe/Paris"
           coverage: xdebug
           tools: composer
+
       - name: Show PHP version
         run: php -v && composer -V
 

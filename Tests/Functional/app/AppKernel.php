@@ -40,7 +40,7 @@ class AppKernel extends Kernel
      */
     public function getCacheDir(): string
     {
-        return \sys_get_temp_dir().'/LexikCronFileGeneratorBundle/cache';
+        return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/cache';
     }
 
     /**
@@ -48,7 +48,7 @@ class AppKernel extends Kernel
      */
     public function getLogDir(): string
     {
-        return \sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';
+        return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';
     }
 
     protected function build(ContainerBuilder $container): void
@@ -61,6 +61,6 @@ class AppKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(\sprintf(__DIR__.'/config/%s_config.yml', $this->config));
+        $loader->load(sprintf(__DIR__.'/config/%s_config.yml', $this->config));
     }
 }

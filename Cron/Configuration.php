@@ -20,12 +20,12 @@ class Configuration
     {
         $this->cronConfig = $cronConfig;
         $this->availableEnvs = $this->cronConfig['env_available'];
-        $this->readableAvailableEnvs = \implode(', ', $this->availableEnvs);
+        $this->readableAvailableEnvs = implode(', ', $this->availableEnvs);
 
         $this->checkConfiguration();
     }
 
-    public function initWithEnv(string $env): Configuration
+    public function initWithEnv(string $env): self
     {
         if (!\in_array($env, $this->availableEnvs)) {
             throw new \InvalidArgumentException('Env not available. Use this: '.$this->readableAvailableEnvs);
@@ -97,7 +97,7 @@ class Configuration
         ];
     }
 
-    private function createCrons(): Configuration
+    private function createCrons(): self
     {
         $this->crons = [];
 

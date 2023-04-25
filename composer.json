@@ -29,8 +29,7 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "scripts": {
-        "test": [
-            "vendor/bin/simple-phpunit"
-        ]
+        "test": "vendor/bin/simple-phpunit",
+        "cs-fix": "vendor/bin/php-cs-fixer fix --diff --allow-risky yes"
     }
 }

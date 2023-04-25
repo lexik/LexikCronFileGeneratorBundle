@@ -77,10 +77,10 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'kernel.build_dir' => __DIR__,
             'kernel.runtime_environment' => 'test',
             'kernel.charset' => 'UTF-8',
-            'kernel.environment'      => 'test',
+            'kernel.environment' => 'test',
             'kernel.debug' => false,
             'kernel.bundles_metadata' => [],
-            'kernel.container_class'  => 'AutowiringTestContainer',
+            'kernel.container_class' => 'AutowiringTestContainer',
             'kernel.bundles' => [
                 'FrameworkBundle' => FrameworkBundle::class,
                 'LexikCronFileGeneratorBundle' => LexikCronFileGeneratorBundle::class,
@@ -90,8 +90,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
 
         $container->set(
             'kernel',
-            new class ('test', false) extends Kernel
-            {
+            new class('test', false) extends Kernel {
                 public function registerBundles(): iterable
                 {
                     return [];
@@ -110,7 +109,6 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         foreach ($configs as $extension => $config) {
             $container->loadFromExtension($extension, $config);
         }
-
 
         return $container;
     }
