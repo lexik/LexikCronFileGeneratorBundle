@@ -22,7 +22,7 @@ class GenerateCronCommand extends Command
         $this->dumpFileFactory = $dumpFileFactory;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Generate a cron file')
