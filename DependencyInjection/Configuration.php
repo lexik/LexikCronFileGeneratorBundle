@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('emailto')->defaultNull()->end()
                 ->arrayNode('env_available')
                     ->requiresAtLeastOneElement()
                     ->prototype('scalar')
