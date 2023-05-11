@@ -55,6 +55,7 @@ class DumpFile
             'absolute_path' => $this->configuration->getAbsolutePath(),
             'php_version' => $this->configuration->getPhpVersion(),
             'env' => $this->env,
+            'emailto' => $this->configuration->getEmailto(),
         ]);
     }
 }

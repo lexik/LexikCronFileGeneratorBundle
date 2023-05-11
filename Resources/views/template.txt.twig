@@ -1,3 +1,6 @@
+{% if emailto %}
+EMAILTO="{{ emailto }}"
+{% endif %}
 {% for cron in crons %}
 # {{  cron.name }}
 
