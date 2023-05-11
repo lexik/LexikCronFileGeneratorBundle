@@ -29,6 +29,7 @@ Configure your crons per env in your `config/packages/lexik_cron_file_generator.
 
 ``` yaml
 lexik_cron_file_generator:
+  mailto: ~                      # Send your command output to the list of emails
   env_available:                 # declare your available environements
     - staging                    # example: staging and prod
     - prod
