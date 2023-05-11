@@ -33,7 +33,7 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('php7.3', $configuration->getPhpVersion());
         $this->assertEquals('staging', $configuration->getEnv());
         $this->assertEquals('path/to/cron_file', $configuration->getOutpath());
-        $this->assertSame('noreply@domail.tld', $configuration->getEmailto());
+        $this->assertSame('noreply@domail.tld', $configuration->getMailto());
 
         /** @var Cron $cron */
         foreach ($configuration->getCrons() as $cron) {
@@ -122,7 +122,7 @@ class ConfigurationTest extends TestCase
     private function getFullConfig()
     {
         return [
-            'emailto' => 'noreply@domail.tld',
+            'mailto' => 'noreply@domail.tld',
             'env_available' => [
                 'staging', 'prod',
             ],
