@@ -61,7 +61,7 @@ class Configuration
         return $this->crons;
     }
 
-    public function getMailto(): string
+    public function getMailto(): ?string
     {
         return $this->globalConfig['mailto'];
     }
