@@ -4,21 +4,18 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->ignoreDotFiles(true)
     ->ignoreVCS(true)
-    ->exclude(array('build', 'vendor'))
+    ->exclude(['build', 'vendor'])
     ->files()
     ->name('*.php')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setUsingCache(true)
     ->setRiskyAllowed(true)
     ->setFinder($finder)
-    ->setRules(array(
+    ->setRules([
         '@Symfony' => true,
-        'array_syntax' => array('syntax' => 'short'),
-        'binary_operator_spaces' => array(
-            'align_double_arrow' => false,
-        ),
+        '@Symfony:risky' => true,
         'combine_consecutive_unsets' => true,
         'native_function_invocation' => true,
         'no_useless_else' => true,
@@ -26,5 +23,5 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'phpdoc_summary' => false,
         'strict_comparison' => true,
-    ))
+    ])
 ;

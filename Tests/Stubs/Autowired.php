@@ -6,19 +6,13 @@ use Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFile;
 
 class Autowired
 {
-    /**
-     * @var DumpFile
-     */
-    private $dumpFile;
+    private DumpFile $dumpFile;
 
     public function __construct(DumpFile $dumpFile)
     {
         $this->dumpFile = $dumpFile;
     }
 
-    /**
-     * @return DumpFile
-     */
     public function getDumpFile(): DumpFile
     {
         return $this->dumpFile;

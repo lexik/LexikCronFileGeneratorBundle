@@ -13,29 +13,23 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateCronCommand extends Command
 {
-    protected static $defaultName = 'lexik:cron:generate-file';
+    private DumpFileFactory $dumpFileFactory;
 
-    /**
-     * @var DumpFileFactory
-     */
-    private $dumpFileFactory;
-
-    public function __construct(DumpFileFactory $dumpFileFactory, $name = null)
+    public function __construct(DumpFileFactory $dumpFileFactory, string $name = 'lexik:cron:generate-file')
     {
         parent::__construct($name);
 
         $this->dumpFileFactory = $dumpFileFactory;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
-            ->setName(static::$defaultName)
             ->setDescription('Generate a cron file')
             ->setHelp(<<<'EOPHP'
-The <info>%command.name%</info> generate cron file
+The <info>%command.name%</info> generates cron file
 
-Crons are required for execute the command.
+Crons are required to execute the command.
 EOPHP
             )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the dump file as a dry run.')
@@ -43,18 +37,18 @@ EOPHP
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->title('Generate cron file');
+        $io->title('Generated cron file');
 
-        $dryRun = (boolean) $input->getOption('dry-run');
+        $dryRun = (bool) $input->getOption('dry-run');
 
         try {
             $dumpFile = $this->dumpFileFactory->createWithEnv($input->getArgument('env-mode'));
         } catch (CronEmptyException $e) {
-            $output->writeln('<error>There is no crons in your configuration. Crons are required for execute the command.</error>');
+            $output->writeln('<error>There is no cron in your configuration. Crons are required to execute this command.</error>');
 
             return 1;
         }

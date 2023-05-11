@@ -1,8 +1,7 @@
 framework:
   secret: test
   test: ~
-  session:
-    storage_id: session.storage.mock_file
+  http_method_override: false
 
 twig:
   strict_variables: false

@@ -4,49 +4,31 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Cron;
 
 class Configuration
 {
-    /**
-     * @var array
-     */
-    private $cronConfig;
+    private array $cronConfig;
 
-    /**
-     * @var array
-     */
-    private $crons;
+    private array $crons = [];
 
-    /**
-     * @var string
-     */
-    private $env;
+    private string $env;
 
-    /**
-     * @var array
-     */
-    private $globalConfig;
+    private array $globalConfig;
 
-    /**
-     * @var array
-     */
-    private $availablesEnvs;
+    private array $availableEnvs;
 
-    /**
-     * @var string
-     */
-    private $readableEnvAvailables;
+    private string $readableAvailableEnvs;
 
     public function __construct(array $cronConfig)
     {
         $this->cronConfig = $cronConfig;
-        $this->availablesEnvs = $this->cronConfig['env_available'];
-        $this->readableEnvAvailables = \implode(', ', $this->availablesEnvs);
+        $this->availableEnvs = $this->cronConfig['env_available'];
+        $this->readableAvailableEnvs = implode(', ', $this->availableEnvs);
 
         $this->checkConfiguration();
     }
 
-    public function initWithEnv($env)
+    public function initWithEnv(string $env): self
     {
-        if (!\in_array($env, $this->availablesEnvs)) {
-            throw new \InvalidArgumentException('Env not availables. Use this: '.$this->readableEnvAvailables);
+        if (!\in_array($env, $this->availableEnvs)) {
+            throw new \InvalidArgumentException('Env not available. Use this: '.$this->readableAvailableEnvs);
         }
 
         $this->env = $env;
@@ -56,58 +38,55 @@ class Configuration
         return $this;
     }
 
-    private function checkEnvConfiguration(array $searchIn, string $key)
+    private function checkEnvConfiguration(array $searchIn, string $key): void
     {
-        $countEnvAvailables = \count($this->availablesEnvs);
+        $availableEnvsCount = \count($this->availableEnvs);
 
         $countEnv = 0;
         foreach ($searchIn[$key] as $key => $env) {
-            if (!\in_array($key, $this->availablesEnvs)) {
-                throw new \InvalidArgumentException('Env not availables. Use this: '.$this->readableEnvAvailables);
+            if (!\in_array($key, $this->availableEnvs)) {
+                throw new \InvalidArgumentException('Env not available. Use this: '.$this->readableAvailableEnvs);
             }
 
             ++$countEnv;
         }
 
-        if ($countEnv !== $countEnvAvailables) {
-            throw new \InvalidArgumentException('You have missing env. Use this: '.$this->readableEnvAvailables);
+        if ($countEnv !== $availableEnvsCount) {
+            throw new \InvalidArgumentException('You have missing env. Use this: '.$this->readableAvailableEnvs);
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getCrons()
+    public function getCrons(): array
     {
         return $this->crons;
     }
 
-    public function getUser()
+    public function getUser(): string
     {
         return $this->globalConfig['user'];
     }
 
-    public function getAbsolutePath()
+    public function getAbsolutePath(): string
     {
         return $this->globalConfig['absolute_path'];
     }
 
-    public function getPhpVersion()
+    public function getPhpVersion(): string
     {
         return $this->globalConfig['php_version'];
     }
 
-    public function getEnv()
+    public function getEnv(): string
     {
         return $this->globalConfig['env'];
     }
 
-    public function getOutpath()
+    public function getOutpath(): string
     {
         return $this->globalConfig['output_path'];
     }
 
-    private function init()
+    private function init(): void
     {
         $this->globalConfig = [
             'user' => $this->cronConfig['user'][$this->env],
@@ -118,7 +97,7 @@ class Configuration
         ];
     }
 
-    private function createCrons()
+    private function createCrons(): self
     {
         $this->crons = [];
 
@@ -129,7 +108,7 @@ class Configuration
         return $this;
     }
 
-    private function checkConfiguration()
+    private function checkConfiguration(): void
     {
         foreach (['user', 'absolute_path'] as $value) {
             $this->checkEnvConfiguration($this->cronConfig, $value);

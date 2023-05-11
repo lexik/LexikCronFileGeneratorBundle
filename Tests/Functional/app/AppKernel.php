@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    private $config;
+    private string $config;
 
     public function __construct(string $environment, bool $debug, string $config = 'base')
     {
@@ -25,7 +25,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return [
             new FrameworkBundle(),
@@ -35,28 +35,23 @@ class AppKernel extends Kernel
         ];
     }
 
-    public function getRootDir()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir(): string
     {
-        return __DIR__;
+        return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/cache';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCacheDir()
+    public function getLogDir(): string
     {
-        return \sys_get_temp_dir().'/LexikCronFileGeneratorBundle/cache';
+        return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLogDir()
-    {
-        return \sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';
-    }
-
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $container->register('logger', NullLogger::class);
     }
@@ -64,8 +59,8 @@ class AppKernel extends Kernel
     /**
      * Loads the container configuration.
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(\sprintf(__DIR__.'/config/%s_config.yml', $this->config));
+        $loader->load(sprintf(__DIR__.'/config/%s_config.yml', $this->config));
     }
 }

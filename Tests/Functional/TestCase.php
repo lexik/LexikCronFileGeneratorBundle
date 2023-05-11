@@ -4,6 +4,7 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class TestCase extends WebTestCase
 {
@@ -14,7 +15,7 @@ abstract class TestCase extends WebTestCase
     /**
      * {@inheritdoc}
      */
-    protected static function createKernel(array $options = [])
+    protected static function createKernel(array $options = []): KernelInterface
     {
         require_once __DIR__.'/app/AppKernel.php';
 
@@ -27,6 +28,6 @@ abstract class TestCase extends WebTestCase
     protected function setUp(): void
     {
         $fs = new Filesystem();
-        $fs->remove(\sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
+        $fs->remove(sys_get_temp_dir().'/LexikCronFileGeneratorBundle/');
     }
 }

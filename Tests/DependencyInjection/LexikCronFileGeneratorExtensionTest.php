@@ -23,7 +23,9 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $container = $this->createContainer([
             'framework' => [
                 'secret' => 'testing',
-                ],
+                'ide' => null,
+                'http_method_override' => false,
+            ],
             'twig' => [
                 'strict_variables' => true,
                 'exception_controller' => null, // to be removed in 5.0
@@ -66,7 +68,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $this->assertInstanceOf(DumpFile::class, $container->get('autowired')->getDumpFile());
     }
 
-    private function createContainer(array $configs = [])
+    private function createContainer(array $configs = []): ContainerBuilder
     {
         $container = new ContainerBuilder(new ParameterBag([
             'kernel.cache_dir' => __DIR__,
@@ -75,10 +77,10 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             'kernel.build_dir' => __DIR__,
             'kernel.runtime_environment' => 'test',
             'kernel.charset' => 'UTF-8',
-            'kernel.environment'      => 'test',
+            'kernel.environment' => 'test',
             'kernel.debug' => false,
             'kernel.bundles_metadata' => [],
-            'kernel.container_class'  => 'AutowiringTestContainer',
+            'kernel.container_class' => 'AutowiringTestContainer',
             'kernel.bundles' => [
                 'FrameworkBundle' => FrameworkBundle::class,
                 'LexikCronFileGeneratorBundle' => LexikCronFileGeneratorBundle::class,
@@ -88,10 +90,10 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
 
         $container->set(
             'kernel',
-            new class ('test', false) extends Kernel
-            {
-                public function registerBundles()
+            new class('test', false) extends Kernel {
+                public function registerBundles(): iterable
                 {
+                    return [];
                 }
 
                 public function registerContainerConfiguration(LoaderInterface $loader)
@@ -107,7 +109,6 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         foreach ($configs as $extension => $config) {
             $container->loadFromExtension($extension, $config);
         }
-
 
         return $container;
     }

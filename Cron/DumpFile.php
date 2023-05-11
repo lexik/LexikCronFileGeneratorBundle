@@ -8,20 +8,11 @@ use Twig\Environment;
 
 class DumpFile
 {
-    /**
-     * @var Environment
-     */
-    private $twigEngine;
+    private Environment $twigEngine;
 
-    /**
-     * @var Configuration
-     */
-    private $configuration;
+    private Configuration $configuration;
 
-    /**
-     * @var string
-     */
-    private $env;
+    private string $env;
 
     public function __construct(
         Environment $twigEngine,
@@ -31,7 +22,7 @@ class DumpFile
         $this->configuration = $configuration;
     }
 
-    public function dumpFile()
+    public function dumpFile(): string
     {
         $destination = $this->configuration->getOutpath();
 
@@ -41,12 +32,12 @@ class DumpFile
         return $destination;
     }
 
-    public function dryRun()
+    public function dryRun(): string
     {
         return $this->render();
     }
 
-    public function init($env)
+    public function init($env): void
     {
         $this->configuration->initWithEnv($env);
         $this->env = $env;
@@ -56,7 +47,7 @@ class DumpFile
         }
     }
 
-    private function render()
+    private function render(): string
     {
         return $this->twigEngine->render('@LexikCronFileGenerator/template.txt.twig', [
             'crons' => $this->configuration->getCrons(),

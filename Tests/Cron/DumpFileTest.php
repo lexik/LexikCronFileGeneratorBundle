@@ -14,14 +14,14 @@ class DumpFileTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->outputDir = \sys_get_temp_dir().'/lexik';
-        @\mkdir($this->outputDir);
+        $this->outputDir = sys_get_temp_dir().'/lexik';
+        @mkdir($this->outputDir);
     }
 
     protected function tearDown(): void
     {
-        @\unlink($this->outputDir.'/cron_file');
-        \rmdir($this->outputDir);
+        @unlink($this->outputDir.'/cron_file');
+        rmdir($this->outputDir);
     }
 
     public function testDumpFile()

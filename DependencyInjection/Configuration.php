@@ -10,10 +10,10 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('lexik_cron_file_generator');
-        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('lexik_cron_file_generator');
+        $rootNode = method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('lexik_cron_file_generator');
 
         $rootNode
             ->children()
@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
-            ;
+        ;
 
         return $treeBuilder;
     }

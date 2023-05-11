@@ -19,9 +19,9 @@ class GenerateCronFileCommandTest extends TestCase
 
         $expected = '* * * * * project_staging php7.3 path/to/staging app:test --env=staging';
 
-        $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir') . '/cron_test';
+        $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir').'/cron_test';
 
-        $this->assertStringContainsString($expected, \file_get_contents($cacheDir));
+        $this->assertStringContainsString($expected, file_get_contents($cacheDir));
     }
 
     public function testGenerateEmptyCrons()
@@ -34,7 +34,7 @@ class GenerateCronFileCommandTest extends TestCase
 
         $this->assertSame(1, $tester->execute(['env-mode' => 'staging']));
 
-        $expected = 'There is no crons in your configuration. Crons are required for execute the command';
+        $expected = 'There is no cron in your configuration. Crons are required to execute this command';
 
         $this->assertStringContainsString($expected, $tester->getDisplay());
     }
