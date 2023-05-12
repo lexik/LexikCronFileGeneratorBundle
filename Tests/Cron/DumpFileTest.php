@@ -30,6 +30,7 @@ class DumpFileTest extends TestCase
         $templating->expects($this->any())->method('render')->willReturn('content');
 
         $configuration = new Configuration([
+            'mailto' => 'noreply@email.tld',
             'env_available' => [
                 'staging', 'prod',
             ],
@@ -71,6 +72,7 @@ class DumpFileTest extends TestCase
         $templating->expects($this->never())->method('render');
 
         $configuration = new Configuration([
+            'mailto' => null,
             'env_available' => [
                 'staging',
             ],

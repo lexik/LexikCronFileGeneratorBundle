@@ -61,6 +61,11 @@ class Configuration
         return $this->crons;
     }
 
+    public function getMailto(): ?string
+    {
+        return $this->globalConfig['mailto'];
+    }
+
     public function getUser(): string
     {
         return $this->globalConfig['user'];
@@ -94,6 +99,7 @@ class Configuration
             'php_version' => $this->cronConfig['php_version'],
             'env' => $this->env,
             'output_path' => $this->cronConfig['output_path'],
+            'mailto' => $this->cronConfig['mailto'],
         ];
     }
 
