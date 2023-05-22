@@ -66,7 +66,7 @@ class Configuration
         return $this->globalConfig['mailto'];
     }
 
-    public function getUser(): string
+    public function getUser(): ?string
     {
         return $this->globalConfig['user'];
     }
