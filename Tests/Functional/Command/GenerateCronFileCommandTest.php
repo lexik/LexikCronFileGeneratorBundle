@@ -34,7 +34,22 @@ class GenerateCronFileCommandTest extends TestCase
 
         $this->assertSame(1, $tester->execute(['env-mode' => 'staging']));
 
-        $expected = 'There is no cron in your configuration. Crons are required to execute this command';
+        $expected = 'There is no cron found in the configuration. Crons are required to execute this command';
+
+        $this->assertStringContainsString($expected, $tester->getDisplay());
+    }
+
+    public function testGenerateWithAbsolutePathCheck()
+    {
+        $kernel = $this->bootKernel();
+
+        $tester = new CommandTester(
+            $kernel->getContainer()->get('lexik_bundle_cron_file_generator.command.generate_cron_command')
+        );
+
+        $this->assertSame(1, $tester->execute(['env-mode' => 'prod']));
+
+        $expected = 'The configured "absolute_path: path/to/prod" does not exist';
 
         $this->assertStringContainsString($expected, $tester->getDisplay());
     }

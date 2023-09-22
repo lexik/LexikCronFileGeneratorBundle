@@ -91,6 +91,11 @@ class Configuration
         return $this->globalConfig['output_path'];
     }
 
+    public function getCheckAbsolutePath()
+    {
+        return $this->globalConfig['check_absolute_path'];
+    }
+
     private function init(): void
     {
         $this->globalConfig = [
@@ -100,6 +105,7 @@ class Configuration
             'env' => $this->env,
             'output_path' => $this->cronConfig['output_path'],
             'mailto' => $this->cronConfig['mailto'],
+            'check_absolute_path' => $this->cronConfig['check_absolute_path'][$this->env] ?? false,
         ];
     }
 

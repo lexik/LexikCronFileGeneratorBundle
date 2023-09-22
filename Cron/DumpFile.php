@@ -3,6 +3,7 @@
 namespace Lexik\Bundle\CronFileGeneratorBundle\Cron;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
+use Lexik\Bundle\CronFileGeneratorBundle\Exception\WrongConsoleBinPathException;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Environment;
 
@@ -42,8 +43,14 @@ class DumpFile
         $this->configuration->initWithEnv($env);
         $this->env = $env;
 
+        if ($this->configuration->getCheckAbsolutePath()
+            && false === file_exists($binPath = $this->configuration->getAbsolutePath())
+        ) {
+            throw new WrongConsoleBinPathException(sprintf('The configured "absolute_path: %s" does not exist', $binPath));
+        }
+
         if (empty($this->configuration->getCrons())) {
-            throw new CronEmptyException('There is no crons found in the configuration.');
+            throw new CronEmptyException('There is no cron found in the configuration');
         }
     }
 

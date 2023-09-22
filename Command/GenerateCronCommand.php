@@ -4,6 +4,7 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Command;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFileFactory;
 use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
+use Lexik\Bundle\CronFileGeneratorBundle\Exception\WrongConsoleBinPathException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,7 +49,11 @@ EOPHP
         try {
             $dumpFile = $this->dumpFileFactory->createWithEnv($input->getArgument('env-mode'));
         } catch (CronEmptyException $e) {
-            $output->writeln('<error>There is no cron in your configuration. Crons are required to execute this command.</error>');
+            $output->writeln(sprintf('<error>%s. Crons are required to execute this command.</error>', $e->getMessage()));
+
+            return 1;
+        } catch (WrongConsoleBinPathException $e) {
+            $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
             return 1;
         }

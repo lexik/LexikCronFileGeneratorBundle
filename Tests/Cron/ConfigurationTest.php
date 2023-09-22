@@ -34,6 +34,7 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('staging', $configuration->getEnv());
         $this->assertEquals('path/to/cron_file', $configuration->getOutpath());
         $this->assertSame('noreply@domail.tld', $configuration->getMailto());
+        $this->assertTrue($configuration->getCheckAbsolutePath());
 
         /** @var Cron $cron */
         foreach ($configuration->getCrons() as $cron) {
@@ -134,6 +135,10 @@ class ConfigurationTest extends TestCase
             'absolute_path' => [
                 'staging' => 'path/to/staging',
                 'prod' => 'path/to/prod',
+            ],
+            'check_absolute_path' => [
+                'staging' => true,
+                'prod' => false,
             ],
             'output_path' => 'path/to/cron_file',
             'crons' => [

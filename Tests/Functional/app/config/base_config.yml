@@ -19,6 +19,8 @@ lexik_cron_file_generator:
   absolute_path:
     staging: path/to/staging
     prod: path/to/prod
+  check_absolute_path:
+    prod: true
   output_path: '%kernel.cache_dir%/cron_test'
   crons:
     - { name: 'send email', command: 'app:test', env: { staging: '* * * * *', prod: '* 5 * * *' } }
