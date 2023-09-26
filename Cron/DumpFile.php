@@ -3,6 +3,7 @@
 namespace Lexik\Bundle\CronFileGeneratorBundle\Cron;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
+use Lexik\Bundle\CronFileGeneratorBundle\Exception\WrongConsoleBinPathException;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Environment;
 
@@ -30,6 +31,13 @@ class DumpFile
         $filesystem->dumpFile($destination, $this->render());
 
         return $destination;
+    }
+
+    public function checkPath(): void
+    {
+        if (false === file_exists($binPath = $this->configuration->getAbsolutePath())) {
+            throw new WrongConsoleBinPathException(sprintf('Configured path "%s" does not exist', $binPath));
+        }
     }
 
     public function dryRun(): string

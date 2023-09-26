@@ -4,6 +4,7 @@ namespace Lexik\Bundle\CronFileGeneratorBundle\Command;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFileFactory;
 use Lexik\Bundle\CronFileGeneratorBundle\Exception\CronEmptyException;
+use Lexik\Bundle\CronFileGeneratorBundle\Exception\WrongConsoleBinPathException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,6 +34,7 @@ Crons are required to execute the command.
 EOPHP
             )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the dump file as a dry run.')
+            ->addOption('check-path', 'c', InputOption::VALUE_NONE, 'Check absolute path on crontab generation.')
             ->addArgument('env-mode', InputArgument::REQUIRED, 'Env config')
         ;
     }
@@ -44,6 +46,7 @@ EOPHP
         $io->title('Generated cron file');
 
         $dryRun = (bool) $input->getOption('dry-run');
+        $checkPath = (bool) $input->getOption('check-path');
 
         try {
             $dumpFile = $this->dumpFileFactory->createWithEnv($input->getArgument('env-mode'));
@@ -61,6 +64,16 @@ EOPHP
             $io->write($result);
 
             return 0;
+        }
+
+        if ($checkPath) {
+            try {
+                $dumpFile->checkPath();
+            } catch (WrongConsoleBinPathException $e) {
+                $output->writeln(sprintf('<error>%s.</error>', $e->getMessage()));
+
+                return 1;
+            }
         }
 
         $filename = $dumpFile->dumpFile();

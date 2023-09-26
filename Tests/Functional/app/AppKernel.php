@@ -22,9 +22,6 @@ class AppKernel extends Kernel
         $this->config = $config;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerBundles(): iterable
     {
         return [
@@ -35,17 +32,11 @@ class AppKernel extends Kernel
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheDir(): string
     {
         return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/cache';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLogDir(): string
     {
         return sys_get_temp_dir().'/LexikCronFileGeneratorBundle/logs';

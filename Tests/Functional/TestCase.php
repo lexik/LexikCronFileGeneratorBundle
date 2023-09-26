@@ -12,9 +12,6 @@ abstract class TestCase extends WebTestCase
 
     protected static $client;
 
-    /**
-     * {@inheritdoc}
-     */
     protected static function createKernel(array $options = []): KernelInterface
     {
         require_once __DIR__.'/app/AppKernel.php';
@@ -22,9 +19,6 @@ abstract class TestCase extends WebTestCase
         return new AppKernel('test', true, isset($options['config']) ? $options['config'] : 'base');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $fs = new Filesystem();

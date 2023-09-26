@@ -56,4 +56,19 @@ class GenerateCronFileCommandTest extends TestCase
             $tester->getDisplay()
         );
     }
+
+    public function testCheckExecutivePath()
+    {
+        $kernel = $this->bootKernel();
+
+        $tester = new CommandTester(
+            $kernel->getContainer()->get('lexik_bundle_cron_file_generator.command.generate_cron_command')
+        );
+
+        $this->assertSame(1, $tester->execute(['env-mode' => 'staging', '--check-path' => true]));
+
+        $expected = 'Configured path "path/to/staging" does not exist';
+
+        $this->assertStringContainsString($expected, $tester->getDisplay());
+    }
 }

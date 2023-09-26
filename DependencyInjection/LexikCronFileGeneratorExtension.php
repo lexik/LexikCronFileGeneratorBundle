@@ -10,9 +10,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class LexikCronFileGeneratorExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
