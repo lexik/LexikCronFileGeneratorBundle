@@ -12,16 +12,16 @@
     ],
     "require": {
         "php": ">=7.4",
-        "symfony/console": "^4.4|^5.4|^6.0",
-        "symfony/framework-bundle":  "^4.4|^5.4|^6.0",
-        "symfony/twig-bundle": "^4.4|^5.4|^6.0",
+        "symfony/console": "^4.4|^5.4|^6.0|^7.0",
+        "symfony/framework-bundle":  "^4.4|^5.4|^6.0|^7.0",
+        "symfony/twig-bundle": "^4.4|^5.4|^6.0|^7.0",
         "twig/twig": "^v2.14.0|^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.8|^3.16",
-        "symfony/phpunit-bridge": "^4.4.49|^5.4|^6.0",
-        "symfony/yaml": "^4.4|^5.4|^6.0",
-        "symfony/var-dumper": "^4.4|^5.4|^6.0",
+        "symfony/phpunit-bridge": "^4.4.49|^5.4|^6.0|^7.0",
+        "symfony/yaml": "^4.4|^5.4|^6.0|^7.0",
+        "symfony/var-dumper": "^4.4|^5.4|^6.0|^7.0",
         "phpunit/phpunit": "^9.6.6"
     },
     "autoload": {
