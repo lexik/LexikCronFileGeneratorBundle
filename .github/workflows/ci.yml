@@ -27,7 +27,7 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.can-fail }}
-    name: PHP v${{ matrix.php }}, Symfony v${{ matrix.symfony }} ${{ matrix.composer-flags }}
+    name: "PHP ${{ matrix.php }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
     strategy:
       matrix:
         include:
@@ -57,16 +57,6 @@ jobs:
           path: "~/.composer/cache"
           key: "php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('composer.json') }}-flags-${{ matrix.composer-flags }}"
           restore-keys: "php-"
-
-      - name: Fix PSR container compatibility
-        if: |
-          matrix.symfony == '5.4.*'
-          && endsWith(matrix.composer-flags, 'prefer-lowest')
-        run: composer require psr/container:^1.1
-
-      - name: Silence Symfony deprecation helper for lower deps
-        if: endsWith(matrix.composer-flags, 'prefer-lowest')
-        run: echo "SYMFONY_DEPRECATIONS_HELPER=weak" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: composer update ${{ matrix.composer-flags }} --prefer-dist
