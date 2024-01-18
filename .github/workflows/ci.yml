@@ -63,5 +63,8 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
+      - name: Why composer
+        run: composer why symfony/console
+
       - name: Run PHPUnit Tests
         run: composer test
