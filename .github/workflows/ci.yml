@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { os: ubuntu-20.04, php: 7.2, symfony: "5.4.*", composer-flags: "--prefer-stable --prefer-lowest", can-fail: false }
+          - { os: ubuntu-20.04, php: 7.4, symfony: "5.4.*", composer-flags: "--prefer-stable --prefer-lowest", can-fail: false }
           - { os: ubuntu-latest, php: 8.3, symfony: "6.4.*", composer-flags: "--prefer-stable", can-fail: false }
           - { os: ubuntu-latest, php: 8.2, symfony: "6.3.*", composer-flags: "--prefer-stable", can-fail: false }
           - { os: ubuntu-latest, php: 8.2, symfony: "6.4.*", composer-flags: "--prefer-stable", can-fail: false }
