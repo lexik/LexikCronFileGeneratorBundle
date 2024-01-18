@@ -66,10 +66,6 @@ jobs:
         if: matrix.symfony == '6.3.*@dev'
         run: composer config minimum-stability dev
 
-      - name: Install Symfony ${{ matrix.symfony }}
-        if: matrix.symfony != '6.3.*'
-        run: composer require symfony/symfony:${{ matrix.symfony }} --no-update
-
       - name: Fix PSR container compatibility
         if: |
           matrix.symfony == '5.4.*'
@@ -77,11 +73,13 @@ jobs:
         run: composer require psr/container:^1.1
 
       - name: Silence Symfony deprecation helper for lower deps
-        if: endsWith(matrix.composer_flag, 'prefer-lowest')
+        if: endsWith(matrix.composer-flags, 'prefer-lowest')
         run: echo "SYMFONY_DEPRECATIONS_HELPER=weak" >> $GITHUB_ENV
 
       - name: Install dependencies
-        run: composer update --no-interaction ${{ matrix.composer_flag }} --prefer-dist --no-progress
+        run: composer update ${{ matrix.composer-flags }} --prefer-dist
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
       - name: Run PHPUnit Tests
         run: composer test
