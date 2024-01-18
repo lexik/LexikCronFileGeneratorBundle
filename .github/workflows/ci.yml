@@ -27,7 +27,7 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.can-fail }}
-    name: PHP v${{ matrix.php }}, Symfony v${{ matrix.symfony }} ${{ matrix.composer_flag }}
+    name: PHP v${{ matrix.php }}, Symfony v${{ matrix.symfony }} ${{ matrix.composer-flags }}
     strategy:
       matrix:
         include:
