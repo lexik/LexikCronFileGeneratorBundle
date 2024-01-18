@@ -51,25 +51,17 @@ jobs:
       - name: Show PHP version
         run: php -v && composer -V
 
-      - name: Download Composer cache dependencies from cache
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v3
+      - name: "Cache Composer packages"
+        uses: "actions/cache@v3"
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ matrix.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: ${{ matrix.os }}-composer-
-
-      - name: Set Composer stability
-        if: matrix.symfony == '6.3.*@dev'
-        run: composer config minimum-stability dev
+          path: "~/.composer/cache"
+          key: "php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('composer.json') }}-flags-${{ matrix.composer-flags }}"
+          restore-keys: "php-"
 
       - name: Fix PSR container compatibility
         if: |
           matrix.symfony == '5.4.*'
-          && endsWith(matrix.composer_flag, 'prefer-lowest')
+          && endsWith(matrix.composer-flags, 'prefer-lowest')
         run: composer require psr/container:^1.1
 
       - name: Silence Symfony deprecation helper for lower deps
