@@ -17,7 +17,7 @@ class GenerateCronFileCommandTest extends TestCase
 
         $this->assertSame(0, $tester->execute(['env-mode' => 'staging']));
 
-        $expected = '* * * * * project_staging php7.3 path/to/staging app:test --env=staging';
+        $expected = '* * * * * project_staging php7.3 path/to/staging app:test';
 
         $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir').'/cron_test';
 
@@ -52,7 +52,7 @@ class GenerateCronFileCommandTest extends TestCase
         $this->assertStringContainsString('[OK] Dry run generated', $tester->getDisplay());
         $this->assertStringContainsString('# send email', $tester->getDisplay());
         $this->assertStringContainsString(
-            '* * * * * project_staging php7.3 path/to/staging app:test --env=staging',
+            '* * * * * project_staging php7.3 path/to/staging app:test',
             $tester->getDisplay()
         );
     }
