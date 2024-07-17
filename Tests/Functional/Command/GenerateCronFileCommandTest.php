@@ -17,11 +17,12 @@ class GenerateCronFileCommandTest extends TestCase
 
         $this->assertSame(0, $tester->execute(['env-mode' => 'staging']));
 
-        $expected = '* * * * * project_staging php7.3 path/to/staging app:test --env=staging';
+        $expected = '* * * * * project_staging php7.3 path/to/staging app:test';
 
         $cacheDir = $kernel->getContainer()->getParameter('kernel.cache_dir').'/cron_test';
 
-        $this->assertStringContainsString($expected, file_get_contents($cacheDir));
+        $this->assertStringContainsString($expected, $content = file_get_contents($cacheDir));
+        $this->assertStringContainsString('APP_ENV=staging', $content);
     }
 
     public function testGenerateEmptyCrons()
@@ -52,9 +53,10 @@ class GenerateCronFileCommandTest extends TestCase
         $this->assertStringContainsString('[OK] Dry run generated', $tester->getDisplay());
         $this->assertStringContainsString('# send email', $tester->getDisplay());
         $this->assertStringContainsString(
-            '* * * * * project_staging php7.3 path/to/staging app:test --env=staging',
-            $tester->getDisplay()
+            '* * * * * project_staging php7.3 path/to/staging app:test',
+            $display = $tester->getDisplay()
         );
+        $this->assertStringContainsString('APP_ENV=staging', $display);
     }
 
     public function testCheckExecutivePath()
