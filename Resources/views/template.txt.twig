@@ -4,6 +4,6 @@ MAILTO="{{ mailto }}"
 {% for cron in crons %}
 # {{  cron.name }}
 
-{{ cron.expression }} {{ user }} {{ php_version }} {{ absolute_path }} {{ cron.command }} --env={{ env }}
+{{ cron.expression }} {{ user }} APP_ENV={{ env }} {{ php_version }} {{ absolute_path }} {{ cron.command }}
 
 {% endfor %}
