@@ -1,6 +1,8 @@
 LexikCronFileGeneratorBundle
 ============================
 
+[![PHP Version](https://img.shields.io/packagist/php-v/lexik/cron-file-generator-bundle)](https://packagist.org/packages/lexik/cron-file-generator-bundle)
+![Packagist Downloads](https://img.shields.io/packagist/dm/lexik/cron-file-generator-bundle?style=flat-square&label=Downloads%20Monthly)
 [![Latest Stable Version](https://poser.pugx.org/lexik/cron-file-generator-bundle/v/stable.svg)](https://packagist.org/packages/lexik/cron-file-generator-bundle)
 [![CI Tests](https://github.com/lexik/LexikCronFileGeneratorBundle/actions/workflows/ci.yml/badge.svg)](https://github.com/lexik/LexikCronFileGeneratorBundle/actions/workflows/ci.yml)
 
