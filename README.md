@@ -1,8 +1,8 @@
 LexikCronFileGeneratorBundle
 ============================
 
-[![Build Status](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle.svg?branch=master)](https://travis-ci.org/lexik/LexikCronFileGeneratorBundle)
-[![Coverage Status](https://coveralls.io/repos/github/lexik/LexikCronFileGeneratorBundle/badge.svg?branch=master)](https://coveralls.io/github/lexik/LexikCronFileGeneratorBundle?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/lexik/cron-file-generator-bundle/v/stable.svg)](https://packagist.org/packages/lexik/cron-file-generator-bundle)
+[![CI Tests](https://github.com/lexik/LexikCronFileGeneratorBundle/actions/workflows/ci.yml/badge.svg)](https://github.com/lexik/LexikCronFileGeneratorBundle/actions/workflows/ci.yml)
 
 This symfony bundle provides cron file generation utilities.
 
