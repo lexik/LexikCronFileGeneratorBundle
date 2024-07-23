@@ -62,7 +62,6 @@ class DumpFile
             'user' => $this->configuration->getUser(),
             'absolute_path' => $this->configuration->getAbsolutePath(),
             'php_version' => $this->configuration->getPhpVersion(),
-            'env' => $this->env,
             'mailto' => $this->configuration->getMailto(),
         ]);
     }
