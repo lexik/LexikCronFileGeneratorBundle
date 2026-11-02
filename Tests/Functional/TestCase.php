@@ -8,8 +8,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class TestCase extends WebTestCase
 {
-    use ForwardCompatTestCaseTrait;
-
     protected static $client;
 
     protected static function createKernel(array $options = []): KernelInterface

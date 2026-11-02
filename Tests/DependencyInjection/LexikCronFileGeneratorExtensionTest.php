@@ -16,6 +16,7 @@ use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Kernel\ServicesBundle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel;
@@ -32,7 +33,6 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
             ],
             'twig' => [
                 'strict_variables' => true,
-                'exception_controller' => null, // to be removed in 5.0
             ],
             'lexik_cron_file_generator' => $this->getBundleConfig(),
         ]);
@@ -151,11 +151,17 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
                     return [];
                 }
 
-                public function registerContainerConfiguration(LoaderInterface $loader)
+                public function registerContainerConfiguration(LoaderInterface $loader): void
                 {
                 }
             }
         );
+
+        // Since Symfony 8.1, core services (event_dispatcher, ...) are provided by ServicesBundle
+        if (class_exists(ServicesBundle::class)) {
+            $configs = ['services' => []] + $configs;
+            $container->registerExtension((new ServicesBundle())->getContainerExtension());
+        }
 
         $container->registerExtension(new FrameworkExtension());
         $container->registerExtension(new TwigExtension());
@@ -170,6 +176,10 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
 
     private function compileContainer(ContainerBuilder $container)
     {
+        if (class_exists(ServicesBundle::class)) {
+            (new ServicesBundle())->build($container);
+        }
+
         (new TwigBundle())->build($container);
 
         $container->compile();
