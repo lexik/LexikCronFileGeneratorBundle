@@ -10,5 +10,5 @@ return static function (ContainerConfigurator $container): void {
         ->set('lexik_bundle_cron_file_generator.command.generate_cron_command', GenerateCronCommand::class)
             ->public()
             ->args([service('lexik_bundle_cron_file_generator.cron.dump_file_factory')])
-            ->tag('console.command', ['command' => 'lexik:cron:generate-file']);
+            ->tag('console.command');
 };

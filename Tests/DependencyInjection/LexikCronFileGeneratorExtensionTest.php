@@ -72,7 +72,7 @@ class LexikCronFileGeneratorExtensionTest extends TestCase
         $this->assertSame(GenerateCronCommand::class, $command->getClass());
         $this->assertTrue($command->isPublic());
         $this->assertReferences(['lexik_bundle_cron_file_generator.cron.dump_file_factory'], $command->getArguments());
-        $this->assertSame([['command' => 'lexik:cron:generate-file']], $command->getTag('console.command'));
+        $this->assertSame([[]], $command->getTag('console.command'));
 
         $this->assertSame('lexik_cron_file_generator.cron.dump_file', (string) $container->getAlias(DumpFile::class));
     }
