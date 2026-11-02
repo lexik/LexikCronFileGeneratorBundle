@@ -4,19 +4,20 @@ on:
   pull_request:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.can-fail }}
     name: "PHP ${{ matrix.php }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-22.04, php: 7.4, symfony: "5.4.*", composer-flags: "--prefer-stable --prefer-lowest", can-fail: false }
-          - { os: ubuntu-latest, php: 8.3, symfony: "6.4.*", composer-flags: "--prefer-stable", can-fail: false }
-          - { os: ubuntu-latest, php: 8.2, symfony: "6.4.*", composer-flags: "--prefer-stable", can-fail: false }
-          - { os: ubuntu-latest, php: 8.3, symfony: "7.4.*", composer-flags: "--prefer-stable", can-fail: false }
+          - { os: ubuntu-latest, php: 8.1, symfony: "6.4.*", composer-flags: "--prefer-stable --prefer-lowest" }
+          - { os: ubuntu-latest, php: 8.2, symfony: "7.4.*", composer-flags: "--prefer-stable" }
+          - { os: ubuntu-latest, php: 8.4, symfony: "8.1.*", composer-flags: "--prefer-stable" }
 
     steps:
       - name: "Checkout"
@@ -25,11 +26,11 @@ jobs:
           fetch-depth: 2
 
       - name: "Cache Composer packages"
-        uses: "actions/cache@v3"
+        uses: "actions/cache@v4"
         with:
           path: "~/.composer/cache"
           key: "php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('composer.json') }}-flags-${{ matrix.composer-flags }}"
-          restore-keys: "php-"
+          restore-keys: "php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -37,10 +38,19 @@ jobs:
           php-version: "${{ matrix.php }}"
           tools: "composer:v2,flex"
 
+      # Composer >= 2.9 skips vulnerable versions when resolving, which would hide
+      # vulnerable lower bounds from the audit below
+      - name: "Allow vulnerable versions to be resolved"
+        if: contains(matrix.composer-flags, '--prefer-lowest')
+        run: composer config --global audit.block-insecure false
+
       - name: Install dependencies
         run: composer update ${{ matrix.composer-flags }} --prefer-dist
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
+
+      - name: "Audit dependencies"
+        run: composer audit
 
       - name: Run PHPUnit Tests
         run: composer test
