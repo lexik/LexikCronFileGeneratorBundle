@@ -2,10 +2,6 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         backupGlobals="false"
-        backupStaticAttributes="false"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true"
         processIsolation="false"
         stopOnFailure="false"
         bootstrap="vendor/autoload.php"
@@ -24,8 +20,8 @@
   </coverage>
 
   <php>
-    <env name="SYMFONY_MAX_PHPUNIT_VERSION" value="9.5"></env>
-    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0&amp;max[direct]=27"></env>
+    <env name="SYMFONY_MAX_PHPUNIT_VERSION" value="9.6"></env>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0&amp;max[direct]=0"></env>
   </php>
 
   <testsuites>
