@@ -3,10 +3,19 @@
 namespace Lexik\Bundle\CronFileGeneratorBundle\Tests\Functional\Command;
 
 use Lexik\Bundle\CronFileGeneratorBundle\Tests\Functional\TestCase;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateCronFileCommandTest extends TestCase
 {
+    public function testCommandIsRegisteredWithItsName()
+    {
+        $command = (new Application($this->bootKernel()))->find('lexik:cron:generate-file');
+
+        $this->assertSame('lexik:cron:generate-file', $command->getName());
+        $this->assertSame('Generate a cron file', $command->getDescription());
+    }
+
     public function testGenerateFullConfiguration()
     {
         $kernel = $this->bootKernel();

@@ -8,6 +8,16 @@ LexikCronFileGeneratorBundle
 
 This symfony bundle provides cron file generation utilities.
 
+Requirements
+============
+
+* PHP 8.1 or higher
+* Symfony 6.4, 7.4 or 8.x
+* Twig 3
+
+Using an older PHP or Symfony version? Stick to the `v1.3.x` releases (latest: `v1.3.3`).
+Upgrading from 1.x? See [UPGRADE-2.0.md](UPGRADE-2.0.md).
+
 Installation
 ============
 
