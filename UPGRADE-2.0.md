@@ -5,11 +5,14 @@ Requirements
 ------------
 
 * PHP 8.1 or higher is required.
-* Symfony 6.4, 7.4 or 8.x is required (support for Symfony 4.4, 5.4 and 6.0 to 6.3 is dropped).
+* Symfony 6.4, 7.4 or 8.1+ is required (support for Symfony 4.4, 5.4, 6.0 to 6.3
+  and 8.0 is dropped; Symfony 8.0 is end-of-life).
 * Twig 3 is required (support for Twig 2 is dropped), with a lower bound raised to
   a version without known security advisories.
 * Services are now loaded from PHP configuration files instead of XML ones. Service IDs
   and the `Lexik\Bundle\CronFileGeneratorBundle\Cron\DumpFile` alias are unchanged.
+* Documentation examples now use PHP configuration files
+  (`config/packages/lexik_cron_file_generator.php`).
 
 Command
 -------
@@ -39,7 +42,8 @@ Command
 Dependency conflicts
 --------------------
 
-The `conflict` section of `composer.json` excludes versions of some transitive Symfony
-dependencies (`symfony/cache`, `symfony/http-foundation`, `symfony/http-kernel`,
-`symfony/routing`) affected by known security advisories. These bounds are revised
-when new advisories are published; `composer audit` runs in the CI as a safeguard.
+The `conflict` section of `composer.json` excludes versions of some Symfony dependencies
+(`symfony/cache`, `symfony/config`, `symfony/filesystem`, `symfony/framework-bundle`,
+`symfony/http-foundation`, `symfony/http-kernel`, `symfony/routing`) affected by known
+security advisories. These bounds are revised when new advisories are published;
+`composer audit` runs in the CI as a safeguard.
