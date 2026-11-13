@@ -25,25 +25,42 @@ Example with the following context:
 
 **Note** Having different PHP versions is not possible and not recommended.
 
-Configure your crons per env in your `config/packages/lexik_cron_file_generator.yaml`:
+Configure your crons per env in your `config/packages/lexik_cron_file_generator.php`:
 
-``` yaml
-lexik_cron_file_generator:
-  mailto: ~                      # Send your command output to the list of emails
-  env_available:                 # declare your available environements
-    - staging                    # example: staging and prod
-    - prod
-  user:
-    staging: project_staging
-    prod: project_prod
-  php_version: php8.2
-  absolute_path:
-    staging: path/to/staging/bin/console
-    prod: path/to/prod/bin/console
-  output_path: '%kernel.cache_dir%/cron_test'
-  crons:
-    - { name: 'Send email', command: 'app:test', env: { staging: '* * * * *', prod: '* 5 * * *' } }
+``` php
+<?php
 
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $container): void {
+    $container->extension('lexik_cron_file_generator', [
+        'mailto' => null,
+        'env_available' => [
+            'staging',
+            'prod',
+        ],
+        'user' => [
+            'staging' => 'project_staging',
+            'prod' => 'project_prod',
+        ],
+        'php_version' => 'php8.2',
+        'absolute_path' => [
+            'staging' => 'path/to/staging/bin/console',
+            'prod' => 'path/to/prod/bin/console',
+        ],
+        'output_path' => '%kernel.cache_dir%/cron_test',
+        'crons' => [
+            [
+                'name' => 'Send email',
+                'command' => 'app:test',
+                'env' => [
+                    'staging' => '* * * * *',
+                    'prod' => '* 5 * * *',
+                ],
+            ],
+        ],
+    ]);
+};
 ```
 
 As you can see you just have to configure your crons for each environment.
