@@ -12,10 +12,10 @@ Requirements
 ============
 
 * PHP 8.1 or higher
-* Symfony 6.4, 7.4 or 8.x
+* Symfony 6.4, 7.4 or 8.1+ (Symfony 8.0 is end-of-life and not supported)
 * Twig 3
 
-Using an older PHP or Symfony version? Stick to the `v1.3.x` releases (latest: `v1.3.3`).
+Using an older PHP or Symfony version? Stick to the `1.x` releases (latest: `1.4.0`).
 Upgrading from 1.x? See [UPGRADE-2.0.md](UPGRADE-2.0.md).
 
 Installation
