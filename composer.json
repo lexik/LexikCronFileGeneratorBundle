@@ -11,24 +11,24 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
-        "symfony/console": "^6.4|^7.4|^8.1",
-        "symfony/framework-bundle": "^6.4|^7.4|^8.1",
-        "symfony/twig-bundle": "^6.4|^7.4|^8.1",
-        "twig/twig": "^3.27"
+        "php": ">=8.2",
+        "symfony/console": "^7.4|^8.1",
+        "symfony/framework-bundle": "^7.4|^8.1",
+        "symfony/twig-bundle": "^7.4|^8.1",
+        "twig/twig": "^3.31.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^7.4|^8.1",
-        "symfony/var-dumper": "^6.4|^7.4|^8.1"
+        "symfony/var-dumper": "^7.4|^8.1"
     },
     "conflict": {
-        "symfony/cache": "<6.4.40|>=7.0,<7.4.12",
-        "symfony/config": "<6.4.50|>=7.0,<7.4.23|>=8.0,<8.1.11",
-        "symfony/filesystem": "<6.4.50|>=7.0,<7.4.23|>=8.0,<8.1.11",
-        "symfony/framework-bundle": ">=7.4,<7.4.23|>=8.0,<8.1.11",
-        "symfony/http-foundation": "<6.4.50|>=7.0,<7.4.23|>=8.0,<8.1.11",
-        "symfony/http-kernel": "<6.4.50|>=7.0,<7.4.23|>=8.0,<8.1.11",
-        "symfony/routing": "<6.4.50|>=7.0,<7.4.23|>=8.0,<8.1.11"
+        "symfony/cache": "<7.4.12",
+        "symfony/config": "<7.4.23|>=8.0,<8.1.11",
+        "symfony/filesystem": "<7.4.23|>=8.0,<8.1.11",
+        "symfony/framework-bundle": "<7.4.23|>=8.0,<8.1.11",
+        "symfony/http-foundation": "<7.4.23|>=8.0,<8.1.11",
+        "symfony/http-kernel": "<7.4.23|>=8.0,<8.1.11",
+        "symfony/routing": "<7.4.23|>=8.0,<8.1.11"
     },
     "autoload": {
         "psr-4": { "Lexik\\Bundle\\CronFileGeneratorBundle\\": "" },
