@@ -15,7 +15,7 @@
         "symfony/console": "^7.4|^8.1",
         "symfony/framework-bundle": "^7.4|^8.1",
         "symfony/twig-bundle": "^7.4|^8.1",
-        "twig/twig": "^3.27"
+        "twig/twig": "^3.31.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^7.4|^8.1",
